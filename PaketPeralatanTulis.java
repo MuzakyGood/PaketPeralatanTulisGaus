@@ -45,6 +45,8 @@ class EliminasiGaus {
 }
 
 public class PaketPeralatanTulis {
+    private static String TITLE_APP = "Paket Peralatan Tulis Gaus";
+    private static final String GOALS_APP = "Agar lebih mudah saat memulai bisnis dan ingin menentukan harga satuan untuk sebuah barang,\natau bagi pembeli yang ingin tahu harga satuannya, mereka bisa menggunakan aplikasi ini.";
     private static final String[] NAMA_BARANG = {"Buku Tulis", "Pulpen", "Pensil"};
     private static EliminasiGaus inputPackagePrice() {
         float[][] matriks = null;
@@ -85,6 +87,8 @@ public class PaketPeralatanTulis {
         }
     }
     public static void main(String[] args){
+        System.out.printf("\n\t%s\n\n", TITLE_APP);
+        System.out.printf("Tujuan aplikasi:\n%s\n\n", GOALS_APP);
         var gaus = inputPackagePrice();
         if (gaus == null) System.exit(1);
         gaus.printMatriks();
