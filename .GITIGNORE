@@ -1,0 +1,15 @@
+# Binary file or Dynamic Link Library
+*.a
+*.so
+*.dll
+*.exe
+*.class
+
+# Image file
+*.bmp
+*.png
+*.jpg
+
+# Assets
+img
+image
