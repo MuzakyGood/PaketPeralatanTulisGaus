@@ -23,15 +23,27 @@ class EliminasiGaus {
     public float[] runGaus() {
         int n = matriks.length;
         for (int i = 0; i < n; i++) {
+            int maxRow = i;
+            for (int k = i + 1; k < n; k++) {
+                if (Math.abs(matriks[k][i]) > Math.abs(matriks[maxRow][i])) {
+                    maxRow = k;
+                }
+            }
+            float[] temp = matriks[i];
+            matriks[i] = matriks[maxRow];
+            matriks[maxRow] = temp;
+            if (matriks[i][i] == 0) {
+                System.err.println("\n[Peringatan] Data yang dimasukkan tidak logis atau tidak memiliki solusi unik (Matriks Singular).");
+                return null;
+            }
             for (int k = i + 1; k < n; k++) {
                 float faktor = matriks[k][i] / matriks[i][i];
-                for (int j = i; j <= n; j++)
+                for (int j = i; j <= matriks[i].length - 1; j++) {
                     matriks[k][j] = matriks[k][j] - faktor * matriks[i][j];
+                }
             }
         }
-
         printMatriks();
-
         float[] hasil = new float[n];
         for (int i = n - 1; i >= 0; i--) {
             hasil[i] = matriks[i][n];
@@ -43,7 +55,6 @@ class EliminasiGaus {
         return hasil;
     }
 }
-
 public class PaketPeralatanTulis {
     private static String TITLE_APP = "Paket Peralatan Tulis Gaus";
     private static final String GOALS_APP = "Agar lebih mudah saat memulai bisnis dan ingin menentukan harga satuan untuk sebuah barang,\natau bagi pembeli yang ingin tahu harga satuannya, mereka bisa menggunakan aplikasi ini.";
@@ -80,6 +91,9 @@ public class PaketPeralatanTulis {
         return gaus;
     }
     private static void printResult(float[] resultGaus) {
+        if (resultGaus == null)
+            System.exit(1);
+
         System.out.println("\n=== Harga Satuan ===");
         for (int i = 0; i < resultGaus.length; i++) {
             int hargaFinal = (int) Math.round(resultGaus[i] * 1000);
